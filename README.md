@@ -11,8 +11,11 @@ This plugin generates complete, standalone HTML pages by sending a detailed prom
 ## Installation
 
 ```bash
-yarn add @gui-chat-plugin/generate-html
+yarn add @gui-chat-plugin/generate-html gui-chat-protocol
 ```
+
+> `gui-chat-protocol` is a peer dependency — install it alongside the plugin; the host application provides the runtime and this plugin only declares the compatible range.
+
 
 ## Usage
 
