@@ -12,13 +12,16 @@ export { TOOL_NAME, TOOL_DEFINITION, SYSTEM_PROMPT } from "./definition";
 /**
  * Execute the generateHtml function
  */
+// context is nullable on purpose: hosts that run the plugin without client-side
+// state (MulmoClaude's server bridge) pass an empty or missing context, and
+// reading through it unguarded threw a TypeError instead of returning a result.
 export const executeGenerateHtml = async (
-  context: ToolContext,
+  context: ToolContext | null | undefined,
   args: GenerateHtmlArgs,
 ): Promise<ToolResult<HtmlToolData>> => {
   const { prompt } = args;
 
-  if (!context.app?.generateHtml) {
+  if (!context?.app?.generateHtml) {
     return {
       message: "generateHtml function not available",
       instructions: "Acknowledge that the HTML generation failed.",
