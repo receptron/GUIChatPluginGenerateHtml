@@ -4,6 +4,7 @@
 
 import type { ToolPluginCore, ToolContext, ToolResult } from "gui-chat-protocol";
 import type { GenerateHtmlArgs, HtmlToolData } from "./types";
+import { isGenerateHtmlResponse } from "./hostResponse";
 import { TOOL_DEFINITION, SYSTEM_PROMPT } from "./definition";
 
 // Re-export for convenience
@@ -30,6 +31,14 @@ export const executeGenerateHtml = async (
 
   try {
     const data = await context.app.generateHtml({ prompt });
+
+    if (!isGenerateHtmlResponse(data)) {
+      console.error("ERR:1\n unrecognized generateHtml response", data);
+      return {
+        message: "HTML generation failed",
+        instructions: "Acknowledge that the HTML generation failed.",
+      };
+    }
 
     if (data.success && data.html) {
       return {
