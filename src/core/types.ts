@@ -2,13 +2,7 @@
  * GenerateHtml Plugin Types
  */
 
-export const HTML_LIBRARIES = [
-  "tailwind",
-  "d3.js",
-  "three.js",
-  "p5.js",
-  "mermaid",
-] as const;
+export const HTML_LIBRARIES = ["tailwind", "d3.js", "three.js", "p5.js", "mermaid"] as const;
 
 export type HtmlLibraryType = (typeof HTML_LIBRARIES)[number];
 

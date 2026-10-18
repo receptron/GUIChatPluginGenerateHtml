@@ -21,13 +21,7 @@ export type { GenerateHtmlArgs, HtmlToolData, HtmlLibraryType } from "../core/ty
 export { HTML_LIBRARIES, LIBRARY_DESCRIPTIONS } from "../core/types";
 
 // Re-export utilities
-export {
-  TOOL_NAME,
-  TOOL_DEFINITION,
-  SYSTEM_PROMPT,
-  executeGenerateHtml,
-  pluginCore,
-} from "../core/plugin";
+export { TOOL_NAME, TOOL_DEFINITION, SYSTEM_PROMPT, executeGenerateHtml, pluginCore } from "../core/plugin";
 
 export { View, Preview };
 
