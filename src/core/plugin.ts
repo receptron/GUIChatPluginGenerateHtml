@@ -16,10 +16,7 @@ export { TOOL_NAME, TOOL_DEFINITION, SYSTEM_PROMPT } from "./definition";
 // context is nullable on purpose: hosts that run the plugin without client-side
 // state (MulmoClaude's server bridge) pass an empty or missing context, and
 // reading through it unguarded threw a TypeError instead of returning a result.
-export const executeGenerateHtml = async (
-  context: ToolContext | null | undefined,
-  args: GenerateHtmlArgs,
-): Promise<ToolResult<HtmlToolData>> => {
+export const executeGenerateHtml = async (context: ToolContext | null | undefined, args: GenerateHtmlArgs): Promise<ToolResult<HtmlToolData>> => {
   const { prompt } = args;
 
   if (!context?.app?.generateHtml) {
@@ -48,8 +45,7 @@ export const executeGenerateHtml = async (
         },
         title: prompt.slice(0, 50),
         message: "HTML generation succeeded",
-        instructions:
-          "Acknowledge that the HTML was generated and has been already presented to the user.",
+        instructions: "Acknowledge that the HTML was generated and has been already presented to the user.",
       };
     } else {
       console.error("ERR:1\n no HTML data", data);
@@ -73,8 +69,7 @@ export const pluginCore: ToolPluginCore<HtmlToolData, unknown, GenerateHtmlArgs>
   toolDefinition: TOOL_DEFINITION,
   execute: executeGenerateHtml,
   generatingMessage: "Generating HTML...",
-  isEnabled: (startResponse) =>
-    !!startResponse?.hasAnthropicApiKey || !!startResponse?.hasGoogleApiKey,
+  isEnabled: (startResponse) => !!startResponse?.hasAnthropicApiKey || !!startResponse?.hasGoogleApiKey,
   systemPrompt: SYSTEM_PROMPT,
   backends: ["textLLM"],
 };
